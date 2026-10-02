@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bgjtj1u83gn8u"]
+
+[ext_resource type="Script" uid="uid://ne68qfxwst3a" path="res://cenas/game/game.gd" id="1_yqihq"]
+[ext_resource type="PackedScene" uid="uid://fxmkclqylnb8" path="res://cenas/game/mapa.tscn" id="2_lochm"]
+[ext_resource type="PackedScene" uid="uid://bmcx2o5ancxbr" path="res://cenas/personagem/personagem.tscn" id="3_7brp2"]
+
+[node name="Game" type="Node" unique_id=1818581419]
+script = ExtResource("1_yqihq")
+
+[node name="Mapa" parent="." unique_id=1726266125 instance=ExtResource("2_lochm")]
+
+[node name="Personagem" parent="." unique_id=260759264 instance=ExtResource("3_7brp2")]
+position = Vector2(531, 245)

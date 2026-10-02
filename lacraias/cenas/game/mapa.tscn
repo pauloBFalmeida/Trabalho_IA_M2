@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://fxmkclqylnb8"]
+
+[ext_resource type="Script" uid="uid://batpwgwce6x03" path="res://cenas/game/mapa.gd" id="1_5gt5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smq05"]
+size = Vector2(208, 760)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gt5f"]
+size = Vector2(1612, 126)
+
+[node name="Mapa" type="Node2D" unique_id=1726266125]
+script = ExtResource("1_5gt5f")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1374736327]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1582906667]
+position = Vector2(-106, 359)
+shape = SubResource("RectangleShape2D_smq05")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1548533016]
+position = Vector2(1391, 361)
+shape = SubResource("RectangleShape2D_smq05")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=71532377]
+position = Vector2(575, 791)
+shape = SubResource("RectangleShape2D_5gt5f")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1686688981]
+position = Vector2(575, -69)
+shape = SubResource("RectangleShape2D_5gt5f")
