@@ -14,7 +14,7 @@ func _ready():
 func _process(delta):
 	label_fps.set_text("FPS: %.1f" % (1 / delta))
 	
-	if Input.is_action_pressed("start_action"):
+	if Input.is_action_pressed("btn_select"):
 		thread_test.end_thread()
 		call_deferred("_voltar_menu")
 
