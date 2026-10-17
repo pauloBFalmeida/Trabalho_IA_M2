@@ -7,6 +7,11 @@ var delta_conjunto = 0.0
 var label_thread
 
 func _ready():
+	# ___ PARA O TESTE ___
+	queue_free()
+	return
+	# ___ ____________ ___
+	
 	label_thread = get_node("LabelThread")
 	
 	thread.start(self, "_work", "hello")   # object, method name, userdata
