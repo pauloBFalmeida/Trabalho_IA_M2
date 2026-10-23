@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://cenas/game/inimigos/Inimigo.gd" type="Script" id=1]
+[ext_resource path="res://assets/artes/insetos/aranha.png" type="Texture" id=2]
+[ext_resource path="res://cenas/game/inimigos/cerebro.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 30.4869
+
+[node name="Inimigo" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+jogador_path = null
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, -0.44014 )
+transform/scale = Vector2( 0.125, 0.125 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Cerebro" type="Node" parent="."]
+
+script/script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -40.0
+margin/top = 26.0
+margin/right = 6.0
+margin/bottom = 40.0
+text = "Estado:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
