@@ -21,7 +21,7 @@ func _ready():
 	corpo = get_parent()
 	label_estado = get_node("../Label")
 
-func _process(delta):
+func _fixed_process(delta):
 	var prox_estado = _verifica_prox_estado()
 	if prox_estado != estado_atual:
 		_change_state(prox_estado)

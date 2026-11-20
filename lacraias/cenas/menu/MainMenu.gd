@@ -1,6 +1,5 @@
 extends Control
 
-var label_debug
 
 func _ready():
 	var btn_jogar = get_node("ButtonJogar")

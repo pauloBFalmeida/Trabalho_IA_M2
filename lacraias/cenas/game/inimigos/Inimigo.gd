@@ -12,7 +12,7 @@ func _ready():
 	cerebro = get_node("Cerebro")
 	cerebro.set_jogador(jogador)
 	
-	cerebro.set_process(true)
+	cerebro.set_fixed_process(true)
 	set_fixed_process(true)
 
 func _fixed_process(delta):
