@@ -29,24 +29,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = -21.0
-margin/top = 37.0
-margin/right = 19.0
-margin/bottom = 51.0
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label1" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = -22.0
-margin/top = 56.0
-margin/right = 18.0
-margin/bottom = 70.0
+margin/left = -23.0
+margin/top = 42.0
+margin/right = 17.0
+margin/bottom = 56.0
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
