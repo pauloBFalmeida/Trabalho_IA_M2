@@ -11,11 +11,9 @@ const MAX_INPUT_VALUE = 128
 const DEADZONE = 30
 
 var personagem
-var label
 
 func _ready():
 	personagem = get_node(personagem_path)
-	label = personagem.get_node("Label")
 	
 	set_process(true)
 
@@ -47,5 +45,3 @@ func _process(delta):
 	# normaliza mantendo o range do analogico
 	direcao = direcao.clamped(MAX_INPUT_VALUE) / MAX_INPUT_VALUE
 	var motion = personagem.move(direcao * velocidade * delta)
-	
-	label.set_text("%.2f" % direcao.length())
