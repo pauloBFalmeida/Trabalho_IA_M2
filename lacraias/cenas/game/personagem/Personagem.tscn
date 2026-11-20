@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://cenas/game/personagem/Personagem.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=3]
 
 [node name="Personagem" type="KinematicBody2D"]
 
@@ -15,5 +16,39 @@ script/script = ExtResource( 1 )
 
 texture = ExtResource( 2 )
 modulate = Color( 0.520935, 1, 0.347656, 1 )
+
+[node name="InputMovimento" type="Node" parent="."]
+
+script/script = ExtResource( 3 )
+personagem_path = NodePath("..")
+velocidade = 100.0
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -21.0
+margin/top = 37.0
+margin/right = 19.0
+margin/bottom = 51.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label1" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -22.0
+margin/top = 56.0
+margin/right = 18.0
+margin/bottom = 70.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
