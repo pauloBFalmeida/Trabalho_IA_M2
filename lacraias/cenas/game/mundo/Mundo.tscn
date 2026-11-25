@@ -1,0 +1,221 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_frente.tres" type="Mesh" id=1]
+[ext_resource path="res://cenas/game/personagem/mesh/mesh_sombra.tres" type="Mesh" id=2]
+[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=3]
+
+[sub_resource type="Environment" id=2]
+
+ambient_light/enabled = false
+ambient_light/color = Color( 1, 1, 1, 1 )
+ambient_light/energy = 1.0
+fxaa/enabled = false
+background/mode = 2
+background/color = Color( 0.388235, 0.427451, 0.47451, 1 )
+background/energy = 1.0
+background/scale = 1.0
+background/glow = 0.0
+background/canvas_max_layer = null
+glow/enabled = false
+glow/blur_passes = 1
+glow/blur_scale = 1
+glow/blur_strength = 1
+glow/blur_blend_mode = null
+glow/bloom = 0.0
+glow/bloom_treshold = 0.5
+dof_blur/enabled = false
+dof_blur/blur_passes = 1
+dof_blur/begin = 100.0
+dof_blur/range = 10.0
+hdr/enabled = false
+hdr/tonemapper = 0
+hdr/exposure = 0.4
+hdr/white = 1.0
+hdr/glow_treshold = 0.95
+hdr/glow_scale = 0.2
+hdr/min_luminance = 0.4
+hdr/max_luminance = 8.0
+hdr/exposure_adj_speed = 0.5
+fog/enabled = false
+fog/begin = 100.0
+fog/begin_color = Color( 0, 0, 0, 1 )
+fog/end_color = Color( 0, 0, 0, 1 )
+fog/attenuation = 1.0
+fog/bg = true
+bcs/enabled = false
+bcs/brightness = 1.0
+bcs/contrast = 1.0
+bcs/saturation = 1.0
+srgb/enabled = false
+
+[sub_resource type="SphereShape" id=1]
+
+radius = 0.0305732
+
+[node name="Mundo" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.25524, 1.28636 )
+projection = 0
+fov = 20.0
+near = 0.1
+far = 100.0
+keep_aspect = 1
+current = false
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10.9353, 8.77162 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 1, 1, 1, 1 )
+colors/specular = Color( 1, 1, 1, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.05
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+shadow/mode = 0
+shadow/max_distance = 0.0
+shadow/split_weight = 0.5
+shadow/zoffset_scale = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+environment = SubResource( 2 )
+
+[node name="Chao" type="Spatial" parent="."]
+
+_import_path = NodePath(".")
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+visibility/visible = false
+
+[node name="Plane" type="MeshInstance" parent="Chao"]
+
+_import_path = NodePath("Plane")
+_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = true
+geometry/baked_light_tex_id = 0
+mesh/mesh = null
+mesh/skeleton = NodePath("..")
+
+[node name="Personagem" type="KinematicBody" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034703, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.001
+
+[node name="CollisionShape" type="CollisionShape" parent="Personagem"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034703, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite3D" type="Spatial" parent="Personagem"]
+
+_import_path = NodePath(".")
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.25, 0, 0, 0, 0.176777, 0.176777, 0, -0.176777, 0.176777, 0, 0.0107062, 0 )
+
+[node name="Plane" type="MeshInstance" parent="Personagem/Sprite3D"]
+
+_import_path = NodePath("Plane")
+_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21648, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = true
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 1 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+
+[node name="Sprite3DSombra" type="Spatial" parent="Personagem"]
+
+_import_path = NodePath(".")
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.1, 0, 0, 0, -1.62921e-08, 0.1, 0, -0.1, -1.62921e-08, -0.00314973, -0.0132481, 0.00364864 )
+
+[node name="Plane" type="MeshInstance" parent="Personagem/Sprite3DSombra"]
+
+_import_path = NodePath("Plane")
+_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.144881, 0.071599 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = true
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 2 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+
+[node name="Movimento" type="Node" parent="Personagem"]
+
+script/script = ExtResource( 3 )
+personagem_path = NodePath("..")
+velocidade = 0.45
+
+
