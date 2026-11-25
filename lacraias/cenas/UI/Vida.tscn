@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://cenas/UI/Vida.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI/vida/vida_prog.tex" type="Texture" id=2]
+[ext_resource path="res://assets/UI/vida/vida_top.tex" type="Texture" id=3]
+
+[node name="Vida" type="Node2D"]
+
+transform/pos = Vector2( 6.24438, 33.1491 )
+script/script = ExtResource( 1 )
+x_vazio = 72
+x_cheio = 0
+w_vazio = 77
+w_cheio = 5
+
+[node name="SpriteBar" type="Sprite" parent="."]
+
+transform/pos = Vector2( 26, 14 )
+texture = ExtResource( 2 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 5, 8 )
+
+[node name="SpriteTop" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 1 )
+texture = ExtResource( 3 )
+centered = false
+
+
