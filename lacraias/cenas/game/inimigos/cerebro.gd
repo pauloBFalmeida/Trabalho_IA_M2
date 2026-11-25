@@ -4,8 +4,8 @@ const IDLE = 0
 const PERSEGUE = 1
 const ATACA = 2
 
-const PERSEGUE_RANGE = 250.0
-const ATACA_RANGE = 50.0
+const PERSEGUE_RANGE = 0.5
+const ATACA_RANGE = 0.1
 
 var jogador
 var corpo
@@ -27,9 +27,10 @@ func _fixed_process(delta):
 		_change_state(prox_estado)
 
 func _verifica_prox_estado():
-	var corpo_pos = corpo.get_global_pos()
-	var jog_pos = jogador.get_global_pos()
+	var corpo_pos = corpo.get_translation()
+	var jog_pos = jogador.get_translation()
 	var dist = corpo_pos.distance_to(jog_pos)
+	print(dist)
 	if dist <= ATACA_RANGE:
 		return ATACA
 	if dist <= PERSEGUE_RANGE:

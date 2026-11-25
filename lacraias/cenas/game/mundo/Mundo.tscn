@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_frente.tres" type="Mesh" id=1]
-[ext_resource path="res://cenas/game/personagem/mesh/mesh_sombra.tres" type="Mesh" id=2]
-[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=3]
+[ext_resource path="res://cenas/game/personagem/Personagem.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cenas/game/inimigos/aranha/InimigoAranha.tscn" type="PackedScene" id=2]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 
 ambient_light/enabled = false
 ambient_light/color = Color( 1, 1, 1, 1 )
@@ -47,10 +46,6 @@ bcs/brightness = 1.0
 bcs/contrast = 1.0
 bcs/saturation = 1.0
 srgb/enabled = false
-
-[sub_resource type="SphereShape" id=1]
-
-radius = 0.0305732
 
 [node name="Mundo" type="Spatial"]
 
@@ -98,7 +93,7 @@ shadow/zoffset_scale = 2.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 
 [node name="Chao" type="Spatial" parent="."]
 
@@ -129,93 +124,11 @@ geometry/baked_light_tex_id = 0
 mesh/mesh = null
 mesh/skeleton = NodePath("..")
 
-[node name="Personagem" type="KinematicBody" parent="."]
+[node name="Personagem" parent="." instance=ExtResource( 1 )]
 
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-input/ray_pickable = true
-input/capture_on_drag = false
-shape_count = 1
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034703, 0 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-collide_with/static = true
-collide_with/kinematic = true
-collide_with/rigid = true
-collide_with/character = true
-collision/margin = 0.001
+[node name="InimigoAranha" parent="." instance=ExtResource( 2 )]
 
-[node name="CollisionShape" type="CollisionShape" parent="Personagem"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034703, 0 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite3D" type="Spatial" parent="Personagem"]
-
-_import_path = NodePath(".")
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.25, 0, 0, 0, 0.176777, 0.176777, 0, -0.176777, 0.176777, 0, 0.0107062, 0 )
-
-[node name="Plane" type="MeshInstance" parent="Personagem/Sprite3D"]
-
-_import_path = NodePath("Plane")
-_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21648, 0 )
-layers = 1
-geometry/visible = true
-geometry/material_override = null
-geometry/cast_shadow = 1
-geometry/receive_shadows = false
-geometry/range_begin = 0.0
-geometry/range_end = 0.0
-geometry/extra_cull_margin = 0.0
-geometry/billboard = false
-geometry/billboard_y = false
-geometry/depth_scale = false
-geometry/visible_in_all_rooms = false
-geometry/use_baked_light = true
-geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 1 )
-mesh/skeleton = NodePath("..")
-material/0 = null
-
-[node name="Sprite3DSombra" type="Spatial" parent="Personagem"]
-
-_import_path = NodePath(".")
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.1, 0, 0, 0, -1.62921e-08, 0.1, 0, -0.1, -1.62921e-08, -0.00314973, -0.0132481, 0.00364864 )
-
-[node name="Plane" type="MeshInstance" parent="Personagem/Sprite3DSombra"]
-
-_import_path = NodePath("Plane")
-_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.144881, 0.071599 )
-layers = 1
-geometry/visible = true
-geometry/material_override = null
-geometry/cast_shadow = 1
-geometry/receive_shadows = false
-geometry/range_begin = 0.0
-geometry/range_end = 0.0
-geometry/extra_cull_margin = 0.0
-geometry/billboard = false
-geometry/billboard_y = false
-geometry/depth_scale = false
-geometry/visible_in_all_rooms = false
-geometry/use_baked_light = true
-geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 2 )
-mesh/skeleton = NodePath("..")
-material/0 = null
-
-[node name="Movimento" type="Node" parent="Personagem"]
-
-script/script = ExtResource( 3 )
-personagem_path = NodePath("..")
-velocidade = 0.45
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.477342, 0, -0.0545689 )
+jogador_path = NodePath("../Personagem")
 
 
