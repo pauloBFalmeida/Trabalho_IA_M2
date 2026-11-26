@@ -3,7 +3,7 @@
 [ext_resource path="res://cenas/game/inimigos/Inimigo.gd" type="Script" id=1]
 [ext_resource path="res://cenas/game/inimigos/aranha/mesh_aranha.tres" type="Mesh" id=2]
 [ext_resource path="res://cenas/game/personagem/mesh/mesh_sombra.tres" type="Mesh" id=3]
-[ext_resource path="res://cenas/game/inimigos/cerebro.gd" type="Script" id=4]
+[ext_resource path="res://cenas/game/inimigos/aranha/CerebroAranha.gd" type="Script" id=4]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -28,6 +28,8 @@ collision/margin = 0.001
 script/script = ExtResource( 1 )
 jogador_path = null
 mesh_imagem_path = NodePath("Sprite3D/Plane")
+cerebro_path = NodePath("CerebroAranha")
+velocidade = 0.2
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 
@@ -95,23 +97,11 @@ mesh/mesh = ExtResource( 3 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
-[node name="Cerebro" type="Node" parent="."]
+[node name="CerebroAranha" type="Node" parent="."]
 
 script/script = ExtResource( 4 )
-
-[node name="Label" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 2.0
-margin/top = 14.0
-margin/right = 42.0
-margin/bottom = 28.0
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+PERSEGUIR_RANGE = 0.5
+ATACAR_RANGE = 0.12
 
 [node name="Tween" type="Tween" parent="."]
 

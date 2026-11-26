@@ -16,6 +16,7 @@ func _ready():
 	personagem = get_node(personagem_path)
 	
 	set_fixed_process(true)
+	print("REMOVER INPUT MOVIMENTO UI")
 
 func _fixed_process(delta):
 	# movimento
@@ -33,7 +34,6 @@ func _fixed_process(delta):
 	
 	
 	# TODO: REMOVE
-	print("REMOVER ISSO DO INPUT MOVIMENTO")
 	if Input.is_action_pressed("ui_left"):
 		direcao.x -= MAX_INPUT_VALUE
 	if Input.is_action_pressed("ui_right"):
