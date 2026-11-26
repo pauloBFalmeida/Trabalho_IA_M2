@@ -6,7 +6,7 @@ export(NodePath) var plane_protag_soco_path
 
 export(NodePath) var movimento_path
 
-export(float) var alcance_soco = 0.35
+export(float) var alcance_soco = 0.4
 export(int) var dano_soco = 30
 
 var plane_protag_frente
