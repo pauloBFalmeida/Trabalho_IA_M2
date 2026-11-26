@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://cenas/game/inimigos/Inimigo.gd" type="Script" id=1]
 [ext_resource path="res://cenas/game/inimigos/aranha/mesh_aranha.tres" type="Mesh" id=2]
-[ext_resource path="res://cenas/game/personagem/mesh/mesh_sombra.tres" type="Mesh" id=3]
-[ext_resource path="res://cenas/game/inimigos/aranha/CerebroAranha.gd" type="Script" id=4]
+[ext_resource path="res://cenas/utils/mesh_sombra.tres" type="Mesh" id=3]
+[ext_resource path="res://cenas/utils/mesh_notify_exclama.tres" type="Mesh" id=4]
+[ext_resource path="res://cenas/game/inimigos/aranha/CerebroAranha.gd" type="Script" id=5]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -30,6 +31,7 @@ jogador_path = null
 mesh_imagem_path = NodePath("Sprite3D/Plane")
 cerebro_path = NodePath("CerebroAranha")
 velocidade = 0.2
+dano_ataque = 50
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 
@@ -97,9 +99,38 @@ mesh/mesh = ExtResource( 3 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
+[node name="Sprite3DAtaque" type="Spatial" parent="."]
+
+_import_path = NodePath(".")
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0120441, -0.0372684 )
+
+[node name="Plane" type="MeshInstance" parent="Sprite3DAtaque"]
+
+_import_path = NodePath("Plane")
+_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform/local = Transform( 0.125, 0, 0, 0, 0.0883883, 0.0883884, 0, -0.0883884, 0.0883883, 0, 0.0864316, 0.0222415 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = true
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 4 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+
 [node name="CerebroAranha" type="Node" parent="."]
 
-script/script = ExtResource( 4 )
+script/script = ExtResource( 5 )
 PERSEGUIR_RANGE = 0.5
 ATACAR_RANGE = 0.12
 
@@ -109,5 +140,14 @@ playback/process_mode = 1
 playback/active = false
 playback/repeat = false
 playback/speed = 1.0
+
+[node name="TimerAtaque" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.2
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="TimerAtaque" to="." method="_on_TimerAtaque_timeout"]
 
 

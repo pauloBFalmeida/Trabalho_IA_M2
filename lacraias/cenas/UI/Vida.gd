@@ -14,6 +14,8 @@ var sprite_bar
 func _ready():
 	sprite_bar = get_node("SpriteBar")
 	set_vida(1.0)
+	
+	print("TODO: tween de vida caindo")
 
 ## Ajusta a vida para o valor passado na porcentagem entre [0.0, 1.0]
 func set_vida(porcent):

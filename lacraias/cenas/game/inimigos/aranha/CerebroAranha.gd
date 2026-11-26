@@ -11,6 +11,8 @@ var estado_atual = IDLE
 
 var inimigo
 
+var esta_imovel = false
+
 # Ready e Process
 # ---------------------------------------------------------
 
@@ -30,6 +32,9 @@ func _fixed_process(delta):
 # ---------------------------------------------------------
 
 func _verifica_prox_estado():
+	if esta_imovel:
+		return IDLE
+	
 	if inimigo.jogador_dentro_range(ATACAR_RANGE):
 		return ATACAR
 	if inimigo.jogador_dentro_range(PERSEGUIR_RANGE):
@@ -54,4 +59,10 @@ func _acao_estado(delta):
 	elif estado_atual == PERSEGUIR:
 		inimigo.andar_ate_jogador(delta)
 	elif estado_atual == ATACAR:
-		print("TODO Fazer ATACAR")
+		inimigo.atacar_jogador()
+
+# Externo
+# ---------------------------------------------------------
+
+func set_imovel(_imovel):
+	esta_imovel = _imovel

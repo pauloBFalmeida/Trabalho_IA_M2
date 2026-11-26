@@ -5,12 +5,19 @@ export(NodePath) var mesh_imagem_path
 export(NodePath) var cerebro_path
 
 export(float) var velocidade = 0.2
+export(int) var dano_ataque = 15
 
 var jogador
 var cerebro
 
 var mesh_imagem
 var ultimo_angulo = 0.0
+
+var tween
+var sprite_ataque
+var timer_ataque
+
+var esta_cooldown_ataque = false
 
 # Ready
 # ---------------------------------------------------------
@@ -22,9 +29,18 @@ func _ready():
 	cerebro = get_node(cerebro_path)
 	cerebro.set_fixed_process(true)
 	
-	_anim()
+	tween = get_node("Tween")
+	tween.connect("tween_complete", self, "_on_tween_complete")
+	sprite_ataque = get_node("Sprite3DAtaque")
+	sprite_ataque.hide()
+	timer_ataque = get_node("TimerAtaque")
 
-# Acoes do inimigo
+
+# ---------------------------------------------------------
+# Movimento
+# ---------------------------------------------------------
+
+# Acoes de Movimento
 # ---------------------------------------------------------
 
 func jogador_dentro_range(alcance):
@@ -52,18 +68,44 @@ func _olhar(direcao):
 		ultimo_angulo = atan2(direcao.x, direcao.z)
 	mesh_imagem.set_rotation(Vector3(0, 0, ultimo_angulo))
 
+
+# ---------------------------------------------------------
+# Ataque
+# ---------------------------------------------------------
+
+func atacar_jogador():
+	if esta_cooldown_ataque:
+		return
+	
+	esta_cooldown_ataque = true
+	timer_ataque.start()
+	
+	cerebro.set_imovel(true)
+	
+	_anim_ataque()
+	jogador.receber_dano(dano_ataque)
+
+
+func _on_TimerAtaque_timeout():
+	esta_cooldown_ataque = false
+	cerebro.set_imovel(false)
+
 # Tween
 # ---------------------------------------------------------
 
-func _anim():
-	var tween = get_node("Tween")
+func _anim_ataque():
 	tween.interpolate_property(
-		self, 
-		"transform/translation", 
-		Vector3(0, 0, 0), 
-		Vector3(0.15, 0, 0.15), 
-		1, 
-		Tween.TRANS_QUART, 
-		Tween.EASE_IN_OUT
+		sprite_ataque, 
+		"transform/scale", 
+		Vector3(1, 1, 1), 
+		Vector3(0.2, 0.2, 0.2), 
+		timer_ataque.get_wait_time(), 
+		Tween.TRANS_BOUNCE, 
+		Tween.EASE_IN
 	)
 	tween.start()
+	sprite_ataque.show()
+
+func _on_tween_complete(objeto, chave):
+	sprite_ataque.hide()
+

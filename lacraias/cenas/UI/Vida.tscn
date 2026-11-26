@@ -19,7 +19,7 @@ transform/pos = Vector2( 26, 14 )
 texture = ExtResource( 2 )
 centered = false
 region = true
-region_rect = Rect2( 0, 0, 5, 8 )
+region_rect = Rect2( 0, 0, 72, 8 )
 
 [node name="SpriteTop" type="Sprite" parent="."]
 

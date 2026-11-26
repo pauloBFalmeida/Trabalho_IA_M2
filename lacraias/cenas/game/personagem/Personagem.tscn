@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_frente.tres" type="Mesh" id=1]
-[ext_resource path="res://cenas/game/personagem/mesh/mesh_sombra.tres" type="Mesh" id=2]
-[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=3]
+[ext_resource path="res://cenas/game/personagem/Personagem.gd" type="Script" id=1]
+[ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_frente.tres" type="Mesh" id=2]
+[ext_resource path="res://cenas/utils/mesh_sombra.tres" type="Mesh" id=3]
+[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=4]
+[ext_resource path="res://cenas/UI/Vida.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -24,6 +26,8 @@ collide_with/kinematic = true
 collide_with/rigid = true
 collide_with/character = true
 collision/margin = 0.001
+script/script = ExtResource( 1 )
+max_vida = 100
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 
@@ -58,7 +62,7 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = true
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 1 )
+mesh/mesh = ExtResource( 2 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
@@ -87,14 +91,18 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = true
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 2 )
+mesh/mesh = ExtResource( 3 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
 [node name="Movimento" type="Node" parent="."]
 
-script/script = ExtResource( 3 )
+script/script = ExtResource( 4 )
 personagem_path = NodePath("..")
 velocidade = 0.45
+
+[node name="Vida" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 6, 4 )
 
 
