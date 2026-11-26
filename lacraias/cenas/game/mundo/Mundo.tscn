@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://cenas/game/mundo/camera.gd" type="Script" id=1]
-[ext_resource path="res://cenas/game/personagem/Personagem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://cenas/game/inimigos/aranha/InimigoAranha.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cenas/game/mundo/Mundo.gd" type="Script" id=1]
+[ext_resource path="res://cenas/game/mundo/camera.gd" type="Script" id=2]
+[ext_resource path="res://cenas/game/personagem/Personagem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cenas/game/inimigos/aranha/InimigoAranha.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Environment" id=1]
 
@@ -50,7 +51,10 @@ srgb/enabled = false
 
 [node name="Mundo" type="Spatial"]
 
+process/pause_mode = 1
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 1 )
+personagem_path = NodePath("Personagem")
 
 [node name="Camera" type="Camera" parent="."]
 
@@ -66,7 +70,7 @@ visible_layers = 1048575
 environment = null
 h_offset = 0.0
 v_offset = 0.0
-script/script = ExtResource( 1 )
+script/script = ExtResource( 2 )
 personagem_path = NodePath("../Personagem")
 tolerancia = 50
 
@@ -128,9 +132,9 @@ geometry/baked_light_tex_id = 0
 mesh/mesh = null
 mesh/skeleton = NodePath("..")
 
-[node name="Personagem" parent="." instance=ExtResource( 2 )]
+[node name="Personagem" parent="." instance=ExtResource( 3 )]
 
-[node name="InimigoAranha" parent="." instance=ExtResource( 3 )]
+[node name="InimigoAranha" parent="." instance=ExtResource( 4 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.477342, 0, -0.0545689 )
 jogador_path = NodePath("../Personagem")

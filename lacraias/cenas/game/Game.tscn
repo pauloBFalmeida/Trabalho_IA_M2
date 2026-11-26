@@ -1,29 +1,103 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://cenas/game/Game.gd" type="Script" id=1]
 [ext_resource path="res://cenas/game/fps.gd" type="Script" id=2]
 [ext_resource path="res://cenas/game/mundo/Mundo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cenas/game/helpers/FimJogo.gd" type="Script" id=4]
+[ext_resource path="res://assets/artes/util/branco_1.tex" type="Texture" id=5]
 
 [node name="Game" type="Node"]
 
+process/pause_mode = 2
 script/script = ExtResource( 1 )
 
 [node name="LabelFPS" type="Label" parent="."]
 
+process/pause_mode = 2
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 2.0
-margin/top = 2.0
-margin/right = 42.0
-margin/bottom = 16.0
-text = "FPS"
+margin/left = 410.0
+margin/top = 4.0
+margin/right = 476.0
+margin/bottom = 18.0
+text = "FPS: 123.4"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = ExtResource( 2 )
 
 [node name="Mundo" parent="." instance=ExtResource( 3 )]
+
+[node name="FimJogo" type="Node" parent="."]
+
+process/pause_mode = 2
+script/script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="FimJogo"]
+
+visibility/visible = false
+transform/scale = Vector2( 480, 272 )
+texture = ExtResource( 5 )
+centered = false
+modulate = Color( 0.164062, 0.164062, 0.164062, 0.8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tela" type="Control" parent="FimJogo"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 480.0
+margin/bottom = 272.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonMenu" type="Button" parent="FimJogo/Tela"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 176.0
+margin/top = 181.0
+margin/right = 284.0
+margin/bottom = 201.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Voltar ao Menu"
+flat = false
+
+[node name="Label" type="Label" parent="FimJogo/Tela"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 188.0
+margin/top = 113.0
+margin/right = 270.0
+margin/bottom = 127.0
+text = "Você morreu"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Tween" type="Tween" parent="FimJogo"]
+
+playback/process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="pressed" from="FimJogo/Tela/ButtonMenu" to="FimJogo" method="_on_ButtonMenu_pressed"]
 
 
