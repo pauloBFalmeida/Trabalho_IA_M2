@@ -3,15 +3,22 @@ extends KinematicBody
 export(NodePath) var jogador_path
 export(NodePath) var mesh_imagem_path
 export(NodePath) var cerebro_path
+export(NodePath) var sprite_visao_path
 
 export(float) var velocidade = 0.2
 export(int) var dano_ataque = 15
+
+
+export(float) var angulo_visao = 80.0
+var cos_meio_sqrd
 
 var jogador
 var cerebro
 
 var mesh_imagem
 var ultimo_angulo = 0.0
+
+var sprite_visao
 
 var tween
 var sprite_ataque
@@ -25,6 +32,7 @@ var esta_cooldown_ataque = false
 func _ready():
 	jogador = get_node(jogador_path)
 	mesh_imagem = get_node(mesh_imagem_path)
+	sprite_visao = get_node(sprite_visao_path)
 	
 	cerebro = get_node(cerebro_path)
 	cerebro.set_fixed_process(true)
@@ -34,6 +42,9 @@ func _ready():
 	sprite_ataque = get_node("Sprite3DAtaque")
 	sprite_ataque.hide()
 	timer_ataque = get_node("TimerAtaque")
+
+	var c = cos(deg2rad(angulo_visao * 0.5))
+	cos_meio_sqrd = c * c 
 
 
 # ---------------------------------------------------------
@@ -56,6 +67,24 @@ func andar_ate_jogador(delta):
 	# olha
 	_olhar(direcao)
 
+func jogador_no_cone_visao(alcance):
+	var alcance_sqrd = alcance * alcance
+
+	var direcao = jogador.get_translation() - get_translation()
+	direcao.y = 0
+	var dist_sqrd = direcao.length_squared()
+
+	if dist_sqrd > alcance_sqrd or dist_sqrd < 0.0001:
+		return false
+
+	var frente = Vector3(sin(ultimo_angulo), 0, cos(ultimo_angulo))
+	var dot = frente.dot(direcao)
+	if dot <= 0:
+		return false                  # behind the enemy
+
+	# dot / dist >= cos(half angle), squared so there is no sqrt
+	return dot * dot >= cos_meio_sqrd * dist_sqrd
+
 # Helpers do movimento
 # ---------------------------------------------------------
 
@@ -67,6 +96,9 @@ func _olhar(direcao):
 	if abs(direcao.x) + abs(direcao.z) > 0.01:
 		ultimo_angulo = atan2(direcao.x, direcao.z)
 	mesh_imagem.set_rotation(Vector3(0, 0, ultimo_angulo))
+	
+	if sprite_visao:
+		sprite_visao.set_rotation(Vector3(0, ultimo_angulo, 0))
 
 
 # ---------------------------------------------------------

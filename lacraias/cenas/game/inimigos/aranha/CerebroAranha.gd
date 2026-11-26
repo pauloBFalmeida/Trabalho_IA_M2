@@ -2,6 +2,7 @@ extends Node
 
 export(float) var PERSEGUIR_RANGE = 0.5
 export(float) var ATACAR_RANGE = 0.12
+export(float) var MUITO_PROXIMO_RANGE = 0.2
 
 const IDLE = 0
 const PERSEGUIR = 1
@@ -37,7 +38,7 @@ func _verifica_prox_estado():
 	
 	if inimigo.jogador_dentro_range(ATACAR_RANGE):
 		return ATACAR
-	if inimigo.jogador_dentro_range(PERSEGUIR_RANGE):
+	if inimigo.jogador_no_cone_visao(PERSEGUIR_RANGE) or inimigo.jogador_dentro_range(MUITO_PROXIMO_RANGE):
 		return PERSEGUIR
 	return IDLE
 
