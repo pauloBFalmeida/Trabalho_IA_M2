@@ -37,6 +37,7 @@ sprite_visao_path = NodePath("Sprite3DVisao")
 velocidade = 0.2
 dano_ataque = 15
 vida_max = 50
+forca_empurrao = 0.3
 angulo_visao = 80.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -208,6 +209,13 @@ process_mode = 1
 wait_time = 1.2
 one_shot = true
 autostart = false
+
+[node name="TweenEmpurrao" type="Tween" parent="."]
+
+playback/process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 [connection signal="timeout" from="TimerAtaque" to="." method="_on_TimerAtaque_timeout"]
 

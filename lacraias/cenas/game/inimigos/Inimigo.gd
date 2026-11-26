@@ -10,6 +10,8 @@ export(int) var dano_ataque = 15
 
 export(int) var vida_max = 50
 
+export(float) var forca_empurrao = 0.30
+
 export(float) var angulo_visao = 80.0
 var cos_meio_sqrd
 
@@ -26,6 +28,8 @@ var sprite_notify
 var timer_ataque
 var mesh_notify_exclama
 var mesh_notify_interrog
+
+onready var tween_empurrao = get_node("TweenEmpurrao")
 
 var esta_cooldown_ataque = false
 
@@ -169,16 +173,48 @@ func _on_tween_complete(objeto, chave):
 
 func receber_dano(dano):
 	vida -= dano
-	_anim_atencao()
 	
 	if vida <= 0:
 		_matar()
+		return
+	
+	_anim_atencao()
+	_empurrao()
+	
 
 func receber_cura(cura):
 	vida = min(vida + cura, vida_max)
 
 func _matar():
 	emit_signal("matado")
-	yield(get_tree(), "fixed_frame")
-	yield(get_tree(), "fixed_frame")
+	
+	mesh_imagem.hide()
+	cerebro.queue_free()
+	sprite_notify.queue_free()
+	sprite_visao.queue_free()
+	
+	# espera 2 seg
+	for i in range(60):
+		yield(get_tree(), "fixed_frame")
+	
 	queue_free()
+
+# ---------------------------------------------------------
+# Vida
+# ---------------------------------------------------------
+
+func _empurrao():
+	var direcao = _direcao_do_player()
+	direcao = direcao * -1
+	direcao = direcao * forca_empurrao
+	
+	tween_empurrao.interpolate_property(
+		self, 
+		"transform/translation", 
+		get_translation(),
+		get_translation() + direcao, 
+		0.2, 
+		Tween.TRANS_EXPO, 
+		Tween.EASE_OUT
+	)
+	tween_empurrao.start()

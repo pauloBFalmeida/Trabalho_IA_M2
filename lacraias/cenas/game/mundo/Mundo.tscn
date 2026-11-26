@@ -138,5 +138,6 @@ mesh/skeleton = NodePath("..")
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.477342, 0, -0.0545689 )
 jogador_path = NodePath("../Personagem")
+forca_empurrao = 0.3
 
 

@@ -164,7 +164,7 @@ plane_protag_costas_path = NodePath("../Sprite3D/PlaneCostas")
 plane_protag_soco_path = NodePath("../Sprite3D/PlaneSoco")
 movimento_path = NodePath("../Movimento")
 alcance_soco = 0.35
-dano_soco = 30
+dano_soco = 15
 
 [node name="TimerAtaque" type="Timer" parent="Atacar"]
 
