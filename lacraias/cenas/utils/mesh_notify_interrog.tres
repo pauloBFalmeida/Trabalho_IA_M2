@@ -1,6 +1,6 @@
 [gd_resource type="Mesh" load_steps=3 format=1]
 
-[ext_resource path="res://assets/artes/util/sombra_cinza.tex" type="Texture" id=1]
+[ext_resource path="res://assets/artes/util/interrogacao.tex" type="Texture" id=1]
 
 [sub_resource type="FixedMaterial" id=1]
 
@@ -47,7 +47,7 @@ surfaces/0 = {
 "arrays": [ Vector3Array( -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0 ), Vector3Array( 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 ), null, null, Vector2Array( 0, 1, 1, 1, 1, 0, 0, 0 ), null, null, null, IntArray( 0, 2, 1, 0, 3, 2 ) ],
 "material": SubResource( 1 ),
 "morph_arrays": [  ],
-"name": "sombra",
+"name": "notify_interrog",
 "primitive": 4
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )

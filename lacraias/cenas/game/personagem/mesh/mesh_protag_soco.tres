@@ -1,0 +1,54 @@
+[gd_resource type="Mesh" load_steps=3 format=1]
+
+[ext_resource path="res://assets/artes/protagonista/prota_soco_128.tex" type="Texture" id=1]
+
+[sub_resource type="FixedMaterial" id=1]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = true
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = true
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = -1.41999e+26
+fixed_flags/use_alpha = true
+fixed_flags/use_color_array = false
+fixed_flags/use_point_size = false
+fixed_flags/discard_alpha = false
+fixed_flags/use_xy_normalmap = false
+params/diffuse = Color( 1, 1, 1, 1 )
+params/specular = Color( 0, 0, 0, 1 )
+params/emission = Color( 0, 0, 0, 1 )
+params/specular_exp = 40
+params/detail_mix = 1.0
+params/normal_depth = 1
+params/shader = 0
+params/shader_param = 0.5
+params/glow = 0
+params/point_size = 1.0
+uv_xform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+textures/diffuse = ExtResource( 1 )
+textures/diffuse_tc = 0
+textures/detail_tc = 0
+textures/specular_tc = 0
+textures/emission_tc = 0
+textures/specular_exp_tc = 0
+textures/glow_tc = 0
+textures/normal_tc = 0
+textures/shade_param_tc = 0
+
+[resource]
+
+surfaces/0 = {
+"alphasort": false,
+"arrays": [ Vector3Array( -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0 ), Vector3Array( 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 ), null, null, Vector2Array( 0, 1, 1, 1, 1, 0, 0, 0 ), null, null, null, IntArray( 0, 2, 1, 0, 3, 2 ) ],
+"material": SubResource( 1 ),
+"morph_arrays": [  ],
+"name": "protag_soco",
+"primitive": 4
+}
+custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+

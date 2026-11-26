@@ -1,14 +1,21 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://cenas/game/personagem/Personagem.gd" type="Script" id=1]
 [ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_frente.tres" type="Mesh" id=2]
-[ext_resource path="res://cenas/utils/mesh_sombra.tres" type="Mesh" id=3]
-[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=4]
-[ext_resource path="res://cenas/UI/Vida.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_costas.tres" type="Mesh" id=3]
+[ext_resource path="res://cenas/game/personagem/mesh/mesh_protag_soco.tres" type="Mesh" id=4]
+[ext_resource path="res://cenas/utils/mesh_sombra.tres" type="Mesh" id=5]
+[ext_resource path="res://cenas/game/personagem/InputMovimento.gd" type="Script" id=6]
+[ext_resource path="res://cenas/game/personagem/InputAtaque.gd" type="Script" id=7]
+[ext_resource path="res://cenas/UI/Vida.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SphereShape" id=1]
 
 radius = 0.0330165
+
+[sub_resource type="SphereShape" id=2]
+
+radius = 0.155862
 
 [node name="Personagem" type="KinematicBody"]
 
@@ -43,7 +50,7 @@ _import_path = NodePath(".")
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.25, 0, 0, 0, 0.176777, 0.176777, 0, -0.176777, 0.176777, 0, 0.0107062, 0 )
 
-[node name="Plane" type="MeshInstance" parent="Sprite3D"]
+[node name="PlaneFrente" type="MeshInstance" parent="Sprite3D"]
 
 _import_path = NodePath("Plane")
 _import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -63,6 +70,54 @@ geometry/visible_in_all_rooms = false
 geometry/use_baked_light = true
 geometry/baked_light_tex_id = 0
 mesh/mesh = ExtResource( 2 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+
+[node name="PlaneCostas" type="MeshInstance" parent="Sprite3D"]
+
+_import_path = NodePath("Plane")
+_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21648, 0 )
+visibility/visible = false
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = true
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 3 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+
+[node name="PlaneSoco" type="MeshInstance" parent="Sprite3D"]
+
+_import_path = NodePath("Plane")
+_import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21648, 0 )
+visibility/visible = false
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = true
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 4 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
@@ -91,18 +146,70 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = true
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 3 )
+mesh/mesh = ExtResource( 5 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
 [node name="Movimento" type="Node" parent="."]
 
-script/script = ExtResource( 4 )
+script/script = ExtResource( 6 )
 personagem_path = NodePath("..")
 velocidade = 0.45
 
-[node name="Vida" parent="." instance=ExtResource( 5 )]
+[node name="Atacar" type="Node" parent="."]
+
+script/script = ExtResource( 7 )
+plane_protag_frente_path = NodePath("../Sprite3D/PlaneFrente")
+plane_protag_costas_path = NodePath("../Sprite3D/PlaneCostas")
+plane_protag_soco_path = NodePath("../Sprite3D/PlaneSoco")
+movimento_path = NodePath("../Movimento")
+alcance_soco = 0.35
+dano_soco = 30
+
+[node name="TimerAtaque" type="Timer" parent="Atacar"]
+
+process_mode = 1
+wait_time = 0.8
+one_shot = true
+autostart = false
+
+[node name="Vida" parent="." instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 6, 4 )
+
+[node name="Area" type="Area" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = false
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shapes/0/trigger = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision/layers = 1
+collision/mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="timeout" from="Atacar/TimerAtaque" to="Atacar" method="_on_TimerAtaque_timeout"]
+
+[connection signal="body_enter" from="Area" to="Atacar" method="_on_Area_body_enter"]
+
+[connection signal="body_exit" from="Area" to="Atacar" method="_on_Area_body_exit"]
 
 

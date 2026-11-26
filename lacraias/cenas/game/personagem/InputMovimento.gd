@@ -12,6 +12,8 @@ const DEADZONE = 30
 
 var personagem
 
+var esta_imovel = false
+
 func _ready():
 	personagem = get_node(personagem_path)
 	
@@ -19,6 +21,9 @@ func _ready():
 	print("REMOVER INPUT MOVIMENTO UI")
 
 func _fixed_process(delta):
+	if esta_imovel:
+		return
+	
 	# movimento
 	var direcao = Vector2(0, 0)
 	
@@ -60,3 +65,6 @@ func _fixed_process(delta):
 	# movimento 2D (x, y) -> 3D (x, 0, z)
 	var movimento = Vector3(direcao.x, 0, direcao.y) * velocidade * delta
 	var motion = personagem.move(movimento)
+
+func set_imovel(_imovel):
+	esta_imovel = _imovel

@@ -8,6 +8,7 @@ export(NodePath) var sprite_visao_path
 export(float) var velocidade = 0.2
 export(int) var dano_ataque = 15
 
+export(int) var vida_max = 50
 
 export(float) var angulo_visao = 80.0
 var cos_meio_sqrd
@@ -21,15 +22,22 @@ var ultimo_angulo = 0.0
 var sprite_visao
 
 var tween
-var sprite_ataque
+var sprite_notify
 var timer_ataque
+var mesh_notify_exclama
+var mesh_notify_interrog
 
 var esta_cooldown_ataque = false
+
+var vida
 
 # Ready
 # ---------------------------------------------------------
 
 func _ready():
+	add_to_group("inimigos")
+	add_user_signal("matado")
+	
 	jogador = get_node(jogador_path)
 	mesh_imagem = get_node(mesh_imagem_path)
 	sprite_visao = get_node(sprite_visao_path)
@@ -39,12 +47,16 @@ func _ready():
 	
 	tween = get_node("Tween")
 	tween.connect("tween_complete", self, "_on_tween_complete")
-	sprite_ataque = get_node("Sprite3DAtaque")
-	sprite_ataque.hide()
+	sprite_notify = get_node("Sprite3DNotify")
+	mesh_notify_exclama = get_node("Sprite3DNotify/PlaneExclama")
+	mesh_notify_interrog = get_node("Sprite3DNotify/PlaneInterrog")
+	sprite_notify.hide()
 	timer_ataque = get_node("TimerAtaque")
 
 	var c = cos(deg2rad(angulo_visao * 0.5))
-	cos_meio_sqrd = c * c 
+	cos_meio_sqrd = c * c
+	
+	vida = vida_max
 
 
 # ---------------------------------------------------------
@@ -126,8 +138,18 @@ func _on_TimerAtaque_timeout():
 # ---------------------------------------------------------
 
 func _anim_ataque():
+	mesh_notify_interrog.hide()
+	mesh_notify_exclama.show()
+	_tween_anim()
+
+func _anim_atencao():
+	mesh_notify_exclama.hide()
+	mesh_notify_interrog.show()
+	_tween_anim()
+
+func _tween_anim():
 	tween.interpolate_property(
-		sprite_ataque, 
+		sprite_notify, 
 		"transform/scale", 
 		Vector3(1, 1, 1), 
 		Vector3(0.2, 0.2, 0.2), 
@@ -136,8 +158,27 @@ func _anim_ataque():
 		Tween.EASE_IN
 	)
 	tween.start()
-	sprite_ataque.show()
+	sprite_notify.show()
 
 func _on_tween_complete(objeto, chave):
-	sprite_ataque.hide()
+	sprite_notify.hide()
 
+# ---------------------------------------------------------
+# Vida
+# ---------------------------------------------------------
+
+func receber_dano(dano):
+	vida -= dano
+	_anim_atencao()
+	
+	if vida <= 0:
+		_matar()
+
+func receber_cura(cura):
+	vida = min(vida + cura, vida_max)
+
+func _matar():
+	emit_signal("matado")
+	yield(get_tree(), "fixed_frame")
+	yield(get_tree(), "fixed_frame")
+	queue_free()
