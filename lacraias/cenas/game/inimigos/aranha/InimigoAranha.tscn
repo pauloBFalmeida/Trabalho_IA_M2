@@ -31,7 +31,7 @@ jogador_path = null
 mesh_imagem_path = NodePath("Sprite3D/Plane")
 cerebro_path = NodePath("CerebroAranha")
 velocidade = 0.2
-dano_ataque = 50
+dano_ataque = 15
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 
@@ -74,13 +74,12 @@ material/0 = null
 
 _import_path = NodePath(".")
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.125, 0, 0, 0, -2.03651e-08, 0.125, 0, -0.125, -2.03651e-08, 0, 0, -0.0372684 )
+transform/local = Transform( 0.1, 0, 0, 0, 0.0173648, 0.0984808, 0, -0.0984808, 0.0173648, 0, 0.0207001, -0.019232 )
 
 [node name="Plane" type="MeshInstance" parent="Sprite3DSombra"]
 
 _import_path = NodePath("Plane")
 _import_transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
 layers = 1
 geometry/visible = true
 geometry/material_override = null

@@ -70,7 +70,7 @@ material/0 = null
 
 _import_path = NodePath(".")
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.1, 0, 0, 0, -1.62921e-08, 0.1, 0, -0.1, -1.62921e-08, -0.00315, 0, -0.0134862 )
+transform/local = Transform( 0.1, 0, 0, 0, 0.0173648, 0.0984808, 0, -0.0984808, 0.0173648, -0.00315, 0, -0.0163838 )
 
 [node name="Plane" type="MeshInstance" parent="Sprite3DSombra"]
 
